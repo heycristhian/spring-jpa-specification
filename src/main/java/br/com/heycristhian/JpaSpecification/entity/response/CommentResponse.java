@@ -1,23 +1,23 @@
 package br.com.heycristhian.JpaSpecification.entity.response;
 
-import br.com.heycristhian.JpaSpecification.entity.domain.Comment;
+import br.com.heycristhian.JpaSpecification.entity.domain.Post;
 import br.com.heycristhian.JpaSpecification.entity.domain.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostResponse {
+public class CommentResponse {
     private UUID id;
     private ZonedDateTime date;
-    private String title;
-    private String body;
+    private String text;
+    private Post post;
     private User user;
-    private List<Comment> comments;
 }

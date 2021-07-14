@@ -1,9 +1,6 @@
 package br.com.heycristhian.JpaSpecification.entity.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,6 +10,7 @@ import java.util.UUID;
 
 @Builder
 @Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

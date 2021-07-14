@@ -1,28 +1,49 @@
 package br.com.heycristhian.JpaSpecification.service;
 
 import br.com.heycristhian.JpaSpecification.entity.domain.Post;
+import br.com.heycristhian.JpaSpecification.entity.domain.User;
+import br.com.heycristhian.JpaSpecification.entity.request.PostRequest;
+import br.com.heycristhian.JpaSpecification.entity.response.PostResponse;
+import br.com.heycristhian.JpaSpecification.exception.EntityNotFoundException;
 import br.com.heycristhian.JpaSpecification.repository.PostRepository;
+import br.com.heycristhian.JpaSpecification.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
+
     @Autowired
     private PostRepository repository;
 
-    public Post save(Post post) {
-        return repository.save(post);
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public PostResponse save(PostRequest postRequest) {
+        Post post = modelMapper.map(postRequest, Post.class);
+        User user = userRepository.findById(postRequest.getIdUser())
+                .orElseThrow(() -> new EntityNotFoundException(postRequest.getIdUser(), "User"));
+        post.setUser(user);
+        return modelMapper.map(repository.save(post), PostResponse.class);
     }
 
-    public Optional<Post> findById(UUID uuid) {
-        return repository.findById(uuid);
+    public PostResponse findById(UUID uuid) {
+        Post post = repository.findById(uuid).orElseThrow(() -> new EntityNotFoundException(uuid, "Post"));
+        return modelMapper.map(post, PostResponse.class);
     }
 
-    public List<Post> findAll() {
-        return repository.findAll();
+    public List<PostResponse> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(post -> modelMapper.map(post, PostResponse.class))
+                .collect(Collectors.toList());
     }
 }

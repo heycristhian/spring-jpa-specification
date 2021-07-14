@@ -2,7 +2,7 @@ package br.com.heycristhian.JpaSpecification.handler;
 
 import br.com.heycristhian.JpaSpecification.error.RequestError;
 import br.com.heycristhian.JpaSpecification.exception.NonUniqueValueException;
-import br.com.heycristhian.JpaSpecification.exception.ObjectNotFoundException;
+import br.com.heycristhian.JpaSpecification.exception.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,9 +18,9 @@ import java.util.Arrays;
 public class RestUserExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestValidationExceptionHandler.class);
 
-    @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<RequestError> handleUserNotFoundException(ObjectNotFoundException e) {
-        return handleBodyException(e, HttpStatus.NOT_FOUND, "User not found");
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<RequestError> handleUserNotFoundException(EntityNotFoundException e) {
+        return handleBodyException(e, HttpStatus.NOT_FOUND, "Entity not found");
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

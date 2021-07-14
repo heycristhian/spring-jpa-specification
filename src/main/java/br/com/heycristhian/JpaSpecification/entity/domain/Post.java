@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Builder
 @Getter
+@Setter
 @Entity
 @Table(name = "tb_post")
 @AllArgsConstructor
@@ -28,4 +29,7 @@ public class Post implements Serializable {
 
     @ManyToOne
     private User user;
+
+    @OneToMany
+    private List<Comment> comments;
 }
