@@ -1,7 +1,9 @@
 package br.com.heycristhian.JpaSpecification.config;
 
 import br.com.heycristhian.JpaSpecification.entity.domain.User;
+import br.com.heycristhian.JpaSpecification.entity.request.CommentRequest;
 import br.com.heycristhian.JpaSpecification.entity.request.PostRequest;
+import br.com.heycristhian.JpaSpecification.entity.response.CommentResponse;
 import br.com.heycristhian.JpaSpecification.entity.response.PostResponse;
 import br.com.heycristhian.JpaSpecification.service.CommentService;
 import br.com.heycristhian.JpaSpecification.service.PostService;
@@ -52,13 +54,13 @@ public class Instantiation implements CommandLineRunner {
                         .build()
         );
 
-//        Comment comment = commentService.save(
-//                Comment.builder()
-//                        .date(ZonedDateTime.now())
-//                        .text("Call me, my number it's 11 22222222")
-//                        .post(post)
-//                        .user(user2)
-//                        .build()
-//        );
+        CommentResponse comment = commentService.save(
+                CommentRequest.builder()
+                        .date(ZonedDateTime.now())
+                        .text("Call me, my number it's 11 22222222")
+                        .idPost(post.getId())
+                        .idUser(user2.getId())
+                        .build()
+        );
     }
 }

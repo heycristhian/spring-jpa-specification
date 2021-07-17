@@ -5,6 +5,7 @@ import br.com.heycristhian.JpaSpecification.entity.domain.User;
 import br.com.heycristhian.JpaSpecification.entity.request.PostRequest;
 import br.com.heycristhian.JpaSpecification.entity.response.PostResponse;
 import br.com.heycristhian.JpaSpecification.exception.EntityNotFoundException;
+import br.com.heycristhian.JpaSpecification.repository.CommentRepository;
 import br.com.heycristhian.JpaSpecification.repository.PostRepository;
 import br.com.heycristhian.JpaSpecification.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -27,6 +28,9 @@ public class PostService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
+
     public PostResponse save(PostRequest postRequest) {
         Post post = modelMapper.map(postRequest, Post.class);
         User user = userRepository.findById(postRequest.getIdUser())
@@ -41,9 +45,11 @@ public class PostService {
     }
 
     public List<PostResponse> findAll() {
-        return repository.findAll()
+        List<PostResponse> posts = repository.findAll()
                 .stream()
                 .map(post -> modelMapper.map(post, PostResponse.class))
                 .collect(Collectors.toList());
+        posts.forEach(post -> post.setComments(commentRepository.findByPostId(post.getId())));
+        return posts;
     }
 }

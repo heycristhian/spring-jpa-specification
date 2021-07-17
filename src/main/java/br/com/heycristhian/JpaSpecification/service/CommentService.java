@@ -7,6 +7,7 @@ import br.com.heycristhian.JpaSpecification.entity.request.CommentRequest;
 import br.com.heycristhian.JpaSpecification.entity.response.CommentResponse;
 import br.com.heycristhian.JpaSpecification.exception.EntityNotFoundException;
 import br.com.heycristhian.JpaSpecification.repository.CommentRepository;
+import br.com.heycristhian.JpaSpecification.repository.CommentSpecification;
 import br.com.heycristhian.JpaSpecification.repository.PostRepository;
 import br.com.heycristhian.JpaSpecification.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -62,5 +63,12 @@ public class CommentService {
                 .build());
 
         return modelMapper.map(comment, CommentResponse.class);
+    }
+
+    public List<CommentResponse> findByFilter(CommentRequest commentRequest) {
+        return repository.findAll(CommentSpecification.filter(commentRequest))
+                .stream()
+                .map(comment -> modelMapper.map(comment, CommentResponse.class))
+                .collect(Collectors.toList());
     }
 }

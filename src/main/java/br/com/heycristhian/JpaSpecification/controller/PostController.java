@@ -2,6 +2,7 @@ package br.com.heycristhian.JpaSpecification.controller;
 
 import br.com.heycristhian.JpaSpecification.entity.request.PostRequest;
 import br.com.heycristhian.JpaSpecification.entity.response.PostResponse;
+import br.com.heycristhian.JpaSpecification.service.CommentService;
 import br.com.heycristhian.JpaSpecification.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class PostController {
 
     @Autowired
     private PostService service;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private ModelMapper modelMapper;

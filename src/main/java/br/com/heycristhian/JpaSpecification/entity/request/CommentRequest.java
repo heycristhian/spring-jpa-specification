@@ -1,10 +1,8 @@
 package br.com.heycristhian.JpaSpecification.entity.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -12,9 +10,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
+@ToString
 public class CommentRequest {
+    @NotNull
     private ZonedDateTime date;
+
     private String text;
+
+    @NotNull
     private UUID idPost;
+
+    @NotNull
     private UUID idUser;
 }
