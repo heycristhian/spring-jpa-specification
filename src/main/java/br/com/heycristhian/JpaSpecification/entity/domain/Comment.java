@@ -1,5 +1,6 @@
 package br.com.heycristhian.JpaSpecification.entity.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,7 +26,8 @@ public class Comment implements Serializable {
     private ZonedDateTime date;
     private String text;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
     @ManyToOne

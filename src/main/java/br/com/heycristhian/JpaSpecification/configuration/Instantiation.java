@@ -1,4 +1,4 @@
-package br.com.heycristhian.JpaSpecification.config;
+package br.com.heycristhian.JpaSpecification.configuration;
 
 import br.com.heycristhian.JpaSpecification.entity.domain.User;
 import br.com.heycristhian.JpaSpecification.entity.request.CommentRequest;

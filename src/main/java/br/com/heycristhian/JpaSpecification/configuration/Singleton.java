@@ -1,4 +1,4 @@
-package br.com.heycristhian.JpaSpecification.config;
+package br.com.heycristhian.JpaSpecification.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

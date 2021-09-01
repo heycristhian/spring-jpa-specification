@@ -1,5 +1,6 @@
 package br.com.heycristhian.JpaSpecification.entity.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,6 +31,7 @@ public class Post implements Serializable {
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     private List<Comment> comments;
 }

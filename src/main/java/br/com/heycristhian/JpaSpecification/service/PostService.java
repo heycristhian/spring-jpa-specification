@@ -49,7 +49,7 @@ public class PostService {
                 .stream()
                 .map(post -> modelMapper.map(post, PostResponse.class))
                 .collect(Collectors.toList());
-        posts.forEach(post -> post.setComments(commentRepository.findByPostId(post.getId())));
+//        posts.forEach(post -> post.setComments(commentRepository.findByPostId(post.getId())));
         return posts;
     }
 }
